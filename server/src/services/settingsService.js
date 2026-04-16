@@ -11,6 +11,20 @@ const DEFAULT_SETTINGS = {
   limits: {
     perSource: config.defaultScanLimitPerSource
   },
+  twitterQuality: {
+    minEngagementScore: config.twitterMinEngagementScore,
+    notifyMinEngagementScore: config.twitterNotifyMinEngagementScore,
+    replyMinEngagementScore: config.twitterReplyMinEngagementScore,
+    minFollowers: config.twitterMinFollowers,
+    excludeRetweets: config.twitterExcludeRetweets
+  },
+  reliability: {
+    lowTrustRequireCrossSource: config.reliabilityLowTrustRequireCrossSource,
+    minDistinctSources: config.reliabilityMinDistinctSources
+  },
+  nonTwitterSignal: {
+    highThreshold: config.nonTwitterSignalHighThreshold
+  },
   notification: {
     feishuWebhook: config.feishuWebhook,
     feishuKeyword: config.feishuKeyword
@@ -31,6 +45,9 @@ function getSettings() {
       ...parsed,
       intervals: { ...DEFAULT_SETTINGS.intervals, ...(parsed.intervals || {}) },
       limits: { ...DEFAULT_SETTINGS.limits, ...(parsed.limits || {}) },
+      twitterQuality: { ...DEFAULT_SETTINGS.twitterQuality, ...(parsed.twitterQuality || {}) },
+      reliability: { ...DEFAULT_SETTINGS.reliability, ...(parsed.reliability || {}) },
+      nonTwitterSignal: { ...DEFAULT_SETTINGS.nonTwitterSignal, ...(parsed.nonTwitterSignal || {}) },
       notification: { ...DEFAULT_SETTINGS.notification, ...(parsed.notification || {}) }
     };
   } catch {
@@ -44,6 +61,9 @@ function updateSettings(nextValue) {
     ...nextValue,
     intervals: { ...getSettings().intervals, ...(nextValue.intervals || {}) },
     limits: { ...getSettings().limits, ...(nextValue.limits || {}) },
+    twitterQuality: { ...getSettings().twitterQuality, ...(nextValue.twitterQuality || {}) },
+    reliability: { ...getSettings().reliability, ...(nextValue.reliability || {}) },
+    nonTwitterSignal: { ...getSettings().nonTwitterSignal, ...(nextValue.nonTwitterSignal || {}) },
     notification: { ...getSettings().notification, ...(nextValue.notification || {}) }
   };
   db.prepare("UPDATE settings SET value = ?, updated_at = ? WHERE id = 1").run(JSON.stringify(merged), nowIso());

@@ -19,6 +19,12 @@ CREATE TABLE IF NOT EXISTS hot_items (
   url TEXT NOT NULL,
   summary TEXT,
   published_at TEXT,
+  engagement_score REAL,
+  view_count INTEGER,
+  engagement_tier TEXT,
+  signal_score REAL,
+  signal_tier TEXT,
+  trust_level TEXT,
   unique_hash TEXT NOT NULL UNIQUE,
   discovered_at TEXT NOT NULL,
   raw_json TEXT
@@ -60,6 +66,15 @@ CREATE TABLE IF NOT EXISTS settings (
 );
 `;
 
+const HOT_ITEMS_ADDITIONAL_COLUMNS = [
+  { name: "engagement_score", type: "REAL" },
+  { name: "view_count", type: "INTEGER" },
+  { name: "engagement_tier", type: "TEXT" },
+  { name: "signal_score", type: "REAL" },
+  { name: "signal_tier", type: "TEXT" },
+  { name: "trust_level", type: "TEXT" }
+];
+
 function applyPragmas(instance, journalMode) {
   const mode = (journalMode || "DELETE").toUpperCase();
   instance.pragma(`journal_mode = ${mode}`);
@@ -73,6 +88,7 @@ function createDb(file, { journalMode } = {}) {
   try {
     applyPragmas(instance, journalMode);
     instance.exec(SCHEMA_SQL);
+    ensureHotItemsColumns(instance);
     return instance;
   } catch (error) {
     try {
@@ -81,6 +97,15 @@ function createDb(file, { journalMode } = {}) {
       // noop
     }
     throw error;
+  }
+}
+
+function ensureHotItemsColumns(instance) {
+  const columns = instance.prepare("PRAGMA table_info(hot_items)").all();
+  const existing = new Set(columns.map((column) => column.name));
+  for (const column of HOT_ITEMS_ADDITIONAL_COLUMNS) {
+    if (existing.has(column.name)) continue;
+    instance.exec(`ALTER TABLE hot_items ADD COLUMN ${column.name} ${column.type}`);
   }
 }
 

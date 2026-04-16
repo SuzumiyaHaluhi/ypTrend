@@ -6,6 +6,7 @@ const { runPipeline } = require("./services/pipelineService");
 const { getSettings, updateSettings } = require("./services/settingsService");
 const { createMonitorSchema, updateMonitorSchema, updateSettingsSchema } = require("./routes/schemas");
 const { eventBus } = require("./services/eventBus");
+const { filterFreshHotItems, filterFreshNotifications, pruneStaleRecords } = require("./services/freshnessService");
 
 function createApp({ scheduler }) {
   const app = express();
@@ -91,21 +92,52 @@ function createApp({ scheduler }) {
   });
 
   app.get("/api/hot-items", (req, res) => {
+    pruneStaleRecords();
     const limit = Number(req.query.limit || 100);
-    const rows = db.prepare("SELECT * FROM hot_items ORDER BY id DESC LIMIT ?").all(limit);
-    res.json(rows);
+    const rows = db.prepare("SELECT * FROM hot_items ORDER BY id DESC").all();
+    res.json(filterFreshHotItems(rows).slice(0, limit));
   });
 
   app.get("/api/notifications", (req, res) => {
+    pruneStaleRecords();
     const limit = Number(req.query.limit || 100);
     const rows = db.prepare(`
-      SELECT n.*, h.title, h.url, m.query AS monitor_query
+      SELECT
+        n.*,
+        h.source,
+        h.title,
+        h.url,
+        h.published_at AS hot_published_at,
+        h.discovered_at AS hot_discovered_at,
+        h.engagement_score,
+        h.view_count,
+        h.engagement_tier,
+        h.signal_score,
+        h.signal_tier,
+        h.trust_level,
+        m.query AS monitor_query,
+        ae.model AS ai_model,
+        ae.is_relevant AS ai_is_relevant,
+        ae.is_credible AS ai_is_credible,
+        ae.confidence AS ai_confidence,
+        ae.reason AS ai_reason,
+        ae.should_notify AS ai_should_notify
       FROM notifications n
       JOIN hot_items h ON h.id = n.hot_item_id
       JOIN monitors m ON m.id = n.monitor_id
-      ORDER BY n.id DESC LIMIT ?
-    `).all(limit);
-    res.json(rows);
+      LEFT JOIN ai_evaluations ae ON ae.id = (
+        SELECT ae2.id
+        FROM ai_evaluations ae2
+        WHERE ae2.hot_item_id = n.hot_item_id AND ae2.monitor_id = n.monitor_id
+        ORDER BY ae2.id DESC
+        LIMIT 1
+      )
+      ORDER BY n.id DESC
+    `).all();
+    const filtered = filterFreshNotifications(rows)
+      .slice(0, limit)
+      .map(({ hot_published_at, hot_discovered_at, ...rest }) => rest);
+    res.json(filtered);
   });
 
   app.get("/api/settings", (_, res) => {

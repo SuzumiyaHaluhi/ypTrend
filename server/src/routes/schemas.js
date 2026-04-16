@@ -20,6 +20,20 @@ const updateSettingsSchema = z.object({
   limits: z.object({
     perSource: z.number().int().min(1).max(30).optional()
   }).optional(),
+  twitterQuality: z.object({
+    minEngagementScore: z.number().int().min(0).max(100000).optional(),
+    notifyMinEngagementScore: z.number().int().min(0).max(1000000).optional(),
+    replyMinEngagementScore: z.number().int().min(0).max(100000).optional(),
+    minFollowers: z.number().int().min(0).max(100000000).optional(),
+    excludeRetweets: z.boolean().optional()
+  }).optional(),
+  reliability: z.object({
+    lowTrustRequireCrossSource: z.boolean().optional(),
+    minDistinctSources: z.number().int().min(1).max(5).optional()
+  }).optional(),
+  nonTwitterSignal: z.object({
+    highThreshold: z.number().int().min(50).max(100).optional()
+  }).optional(),
   notification: z.object({
     feishuWebhook: z.string().url().optional(),
     feishuKeyword: z.string().min(1).optional()

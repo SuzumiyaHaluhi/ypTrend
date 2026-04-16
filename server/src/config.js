@@ -28,6 +28,14 @@ function toJournalMode(value, fallback = "DELETE") {
   return allowed.has(raw) ? raw : fallback;
 }
 
+function toCsvList(value, fallback = []) {
+  const input = value === undefined || value === null || value === "" ? fallback.join(",") : String(value);
+  return input
+    .split(",")
+    .map((x) => x.trim())
+    .filter(Boolean);
+}
+
 const defaultDbFallback = (process.env.NODE_ENV || "development") !== "production";
 
 const config = {
@@ -42,8 +50,18 @@ const config = {
   openRouterTitle: process.env.OPENROUTER_TITLE || "ypTrend",
   twitterApiKey: process.env.TWITTERAPI_IO_KEY || "",
   twitterApiBaseUrl: process.env.TWITTERAPI_IO_BASE_URL || "https://api.twitterapi.io",
+  twitterMinEngagementScore: toNumber(process.env.TWITTER_MIN_ENGAGEMENT_SCORE, 500),
+  twitterNotifyMinEngagementScore: toNumber(process.env.TWITTER_NOTIFY_MIN_ENGAGEMENT_SCORE, 2000),
+  twitterReplyMinEngagementScore: toNumber(process.env.TWITTER_REPLY_MIN_ENGAGEMENT_SCORE, 30),
+  twitterMinFollowers: toNumber(process.env.TWITTER_MIN_FOLLOWERS, 1000),
+  twitterExcludeRetweets: toBoolean(process.env.TWITTER_EXCLUDE_RETWEETS, true),
   feishuWebhook: process.env.FEISHU_WEBHOOK || "",
   feishuKeyword: process.env.FEISHU_KEYWORD || "trend",
+  reliabilityLowTrustRequireCrossSource: toBoolean(process.env.LOW_TRUST_REQUIRE_CROSS_SOURCE, true),
+  reliabilityMinDistinctSources: toNumber(process.env.RELIABILITY_MIN_DISTINCT_SOURCES, 2),
+  nonTwitterSignalHighThreshold: Math.max(50, Math.min(100, toNumber(process.env.NON_TWITTER_SIGNAL_HIGH_THRESHOLD, 70))),
+  freshnessWindowDays: Math.max(1, toNumber(process.env.FRESHNESS_WINDOW_DAYS, 7)),
+  searchLocales: toCsvList(process.env.SEARCH_LOCALES, ["zh-CN", "en-US"]),
   defaultScanLimitPerSource: toNumber(process.env.DEFAULT_SCAN_LIMIT_PER_SOURCE, 8),
   requestTimeoutMs: toNumber(process.env.REQUEST_TIMEOUT_MS, 15000)
 };

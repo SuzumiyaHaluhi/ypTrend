@@ -122,7 +122,7 @@ async function main() {
   const port = uniquePort();
   const baseUrl = `http://127.0.0.1:${port}`;
   const dbFile = ":memory:";
-  const monitorQuery = `AI coding ${Date.now()}`;
+  const monitorQuery = "AI coding";
   const runResults = [];
   process.env.PORT = String(port);
   process.env.DB_FILE = dbFile;
@@ -166,6 +166,12 @@ async function main() {
     }, { timeout: 10000, proxy: false });
     createdMonitor = createResp.data;
 
+    await axios.put(`${baseUrl}/api/settings`, {
+      nonTwitterSignal: {
+        highThreshold: 50
+      }
+    }, { timeout: 10000, proxy: false });
+
     const sources = ["web", "rss", "twitter"];
     let processedAny = false;
     for (const source of sources) {
@@ -176,7 +182,6 @@ async function main() {
       runResults.push({ source, ...runResp.data });
       if ((runResp.data?.processed || 0) > 0) {
         processedAny = true;
-        break;
       }
     }
 
