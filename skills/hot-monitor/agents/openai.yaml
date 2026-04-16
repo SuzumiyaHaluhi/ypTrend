@@ -1,0 +1,4 @@
+interface:
+  display_name: "Hot Monitor"
+  short_description: "Discover and analyze hot topics across open sources"
+  default_prompt: "Use $hot-monitor to collect cross-source trend signals and generate a ranked hotspot report."

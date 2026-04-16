@@ -1,0 +1,293 @@
+{
+  "query": "GLM 5.1",
+  "collected_at": "2026-04-16T07:30:30.325989+00:00",
+  "source_status": {
+    "google_news_rss": "ok",
+    "bing_news_rss": "ok",
+    "hackernews_algolia": "ok",
+    "duckduckgo_html": "ok"
+  },
+  "item_count": 40,
+  "items": [
+    {
+      "source": "google_news_rss",
+      "title": "AI joins the 8-hour work day as GLM ships 5.1 open source LLM, beating Opus 4.6 and GPT-5.4 on SWE-Bench Pro - VentureBeat",
+      "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxNNHU2VEc1WVp1dk54MTFlZGdhcFZ3SGdOQnlxakRIVG9XcF80QWdxd0xKcUdoQ0dKNkdsSzhOS2pOQlhMTWtsVVMwTjRkVXV0MG56YjdENDhMUzg5b3RQM1B1VE1XMnRHRU1MTUhkelBfNFZKVDlMNzh4bXd1d1BRWU5FT0FNU2swMjR1MUFRazhaeHQxcTNLR1dJb3NXN2RKRFBRdV9WQnFreWFkcXNXTA?oc=5",
+      "summary": "AI joins the 8-hour work day as GLM ships 5.1 open source LLM, beating Opus 4.6 and GPT-5.4 on SWE-Bench Pro &nbsp;&nbsp; VentureBeat",
+      "published_at": "Tue, 07 Apr 2026 07:00:00 GMT"
+    },
+    {
+      "source": "google_news_rss",
+      "title": "GLM-5.1 Pushes Agentic Coding Further - HackerNoon",
+      "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTFA4aDY5UmQtLXZjVTltSmh3UFVIRXhKeHRyRHlhQ0VwQW1KRHNibjdzdFh4ZlF0VHM1c0Y3R24zME8xRFFMY2NJdEpTVExrbGJYR1lqcFhXZmg1QmNQU1FTUjlqOHlNeW0wQnVZ?oc=5",
+      "summary": "GLM-5.1 Pushes Agentic Coding Further &nbsp;&nbsp; HackerNoon",
+      "published_at": "Wed, 15 Apr 2026 03:20:27 GMT"
+    },
+    {
+      "source": "google_news_rss",
+      "title": "Z.ai unveils GLM-5.1, enabling AI coding agents to run autonomously for hours - Computerworld",
+      "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxNR2wxaGszQklPVnNyTWlmMmt2RVB4VHlkMUxJcVpDTFFvUTZnS2owLTNUb29TcnBIOXVjZ2E0VHZfNEIxWnZyNExGZ0VHRS03N0RzNGJ2YUUtVkpocEtuRGtPRWMxOUdZQklGNHk5VXJKelhua1JBam9mQ3VMRk9vR0hmR2tGOXZ1XzA5SU01ODhtUEZnOExYVEI4VUc5d3ZoWmM0VDE1elhzZXdncnNwMnJBWl9YU1JqalhIZmZiVS1yQVNUV2c?oc=5",
+      "summary": "Z.ai unveils GLM-5.1, enabling AI coding agents to run autonomously for hours &nbsp;&nbsp; Computerworld",
+      "published_at": "Wed, 08 Apr 2026 10:28:40 GMT"
+    },
+    {
+      "source": "google_news_rss",
+      "title": "Glm 5.1 Open Source Date, Claude 2 New Models Mythos & Capybara, VS Code + Ollama [afdc0d] - Fathom Journal",
+      "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTFBRR1VSa04wQU1Cd2Y1WUdDSWZvNzhiZ2VHREZWb1BRa1c0aUZsSlFqbFVaZlpJQUFKejVUcmxhd3lEUmVSdnFwR0QtLS1ya0hZZllxSGdmT1lHWFBRU1hsbjVWc3NvOVk4Ym52MTNncXQ?oc=5",
+      "summary": "Glm 5.1 Open Source Date, Claude 2 New Models Mythos & Capybara, VS Code + Ollama [afdc0d] &nbsp;&nbsp; Fathom Journal",
+      "published_at": "Wed, 15 Apr 2026 03:06:23 GMT"
+    },
+    {
+      "source": "google_news_rss",
+      "title": "Zhipu AI's GLM-5.1 can rethink its own coding strategy across hundreds of iterations - the-decoder.com",
+      "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxOQ3FCRzBMY3JNUzdHUjRHWDgzV2RaSXJrRC1Zc19IWmF0eHVmSXYyNEdGOWhtX3RRdkFZS2xqMU5aR1l1aFpPSjdNQUdPNXRqMWhLM3c5QVFWVlVuWW5tN1hjM3RsV1RsY0cySnlKcmtKMW0wNjZqTVI2UjlCRHUtX1dZWjJ2Z0pDSVZGQTM1MTJKbUJ1M1VoeERRNFNVSmo1YUtwZXNlc0hJUHh6?oc=5",
+      "summary": "Zhipu AI's GLM-5.1 can rethink its own coding strategy across hundreds of iterations &nbsp;&nbsp; the-decoder.com",
+      "published_at": "Thu, 09 Apr 2026 11:15:02 GMT"
+    },
+    {
+      "source": "google_news_rss",
+      "title": "Z.ai Releases GLM-5.1 Targeting Long-Horizon Tasks - Let's Data Science",
+      "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxPUXp6emx4QkhjVXJvcjdSR1F0RUNOejZvZ2Z1bTlWWWcxQzVmazF4QXZzbmtTTHpDMzlSY01CbFdYNlpZRmJyWmg1ZXZaRzBidjRFV19ZYVhETkJmVG52c1o3bXR1MEFScjFoVU1keF9NSndUcDZrLWRBM2doMjRzRGZweGIzbEJESjJVZllDRDdTQU9s?oc=5",
+      "summary": "Z.ai Releases GLM-5.1 Targeting Long-Horizon Tasks &nbsp;&nbsp; Let's Data Science",
+      "published_at": "Tue, 07 Apr 2026 22:01:24 GMT"
+    },
+    {
+      "source": "google_news_rss",
+      "title": "China’s Zhipu AI open-sources GLM-5.1, raises prices to trim gap with US rivals - South China Morning Post",
+      "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxNLWJpS2lrek95T0x5NUxBcWZFSWc3emNoRGFQYWZIMm96anpZY3pqV3NvbVJ4TEVQTkZDN3loQS12V2JjQ0Ftc2xOdGloZGhmU2xIbTFPRmpKY0ZJVkhOeDJWVTdyRDd3TDNVSGlXZV9ZazJyclc5QXpoRHIzbEQzLVJVSHhSZmhaTEFndl9IQTFaWVM1b0hZZ25jWEZaYWVUZkttak4xQlNTZTJOU3FGNTBjNnd0RWY2aGZfZXBOelpFekEtWVHSAcYBQVVfeXFMTzhLeE15Sk0yOXpVNXhZamdvX2E5cEdOS3JZeTZDeUVlY2JpcVJYRU1ERDFaYVlZRjRyOXByM01BbEJXT2FkQkd6cDRjQVZ2UWNJZ2txd0xiME1ySjVuUVl6ZVZjUGZNOTVnMjFWcEh4N2l5ODEyb3RtOUZDeHdoZVZuSHcxTE15bXJUdlh5VnA2d1RQQThqUGxvSlBPeTVWSkpWQ2ktSlRQQjJyc3kzS1h2a2FkZEQ4bjM2dVo5dDE2OGZ5WUNn?oc=5",
+      "summary": "China’s Zhipu AI open-sources GLM-5.1, raises prices to trim gap with US rivals &nbsp;&nbsp; South China Morning Post",
+      "published_at": "Wed, 08 Apr 2026 13:00:27 GMT"
+    },
+    {
+      "source": "google_news_rss",
+      "title": "Zhipu Raises AI Model Prices 8%--17% As GLM-5.1 Launches - TradingView — Track All Markets",
+      "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxQWDF3Ry1tSTc0V0drUEg1SFBzdlhuRng5US05bkVTRUgxOTZybkdjZW9uWGZlWE9ZR3hfbFBuNTR5bDNUTzJFWG5kRWVwa0NZLWVIcHRRRmtCeVhyQVE1OHB0VUhRNnM3Yno3MFctSVFaZDBBRW9xd2FIa3hpYVRlWm5tamNTNGxFTGtRbmdTWVI1UDR6c1hVU29Fc0hDdmJuQXEydEE0SWZvYkNycWFUOHhGZw?oc=5",
+      "summary": "Zhipu Raises AI Model Prices 8%--17% As GLM-5.1 Launches &nbsp;&nbsp; TradingView — Track All Markets",
+      "published_at": "Wed, 08 Apr 2026 13:16:52 GMT"
+    },
+    {
+      "source": "google_news_rss",
+      "title": "Zhipu AI launches open-source GLM-5.1 model for coding tasks - TestingCatalog",
+      "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxOTzM2YjJjZVBHM2pMTTM2U0Vabi1abVo4MFZCMjkwZHVFdnN6a0JXZGpYNi16Y2xVZlJpRmpuVklXUlpIOUtrXzFvNnRFVUhKcUZvNGsyRHBEcTFBTGYzMUJ2MnNxOVNRUU5QdFRxb0RudURsVVB1R1FTMExnSGQ3d091d2h6b0toeFVFdG5wVWRWaFFXM1Zn?oc=5",
+      "summary": "Zhipu AI launches open-source GLM-5.1 model for coding tasks &nbsp;&nbsp; TestingCatalog",
+      "published_at": "Tue, 07 Apr 2026 23:44:14 GMT"
+    },
+    {
+      "source": "google_news_rss",
+      "title": "Zhipu Unveils GLM-5.1, Its Most Advanced Open-Source Model with 8-Hour Autonomous Task Capability - Pandaily",
+      "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxNTUFpbENObUJJZk9sSGtRU01jdVY3UmFaLVFodmNEYnk3X3FLc3g5N2ZBcTFOQlNCanJjQVBCVU9KLTNNVENseWU1eTMxQ19aRk9KZ2N3ZmZIZEQ0aXg2a2xIMXRYZ2VHV0g2VlUxczF5eVh3ek9ZaTR5ZWRJOUNJOUVXOWJtbHBlQWhEWHF2aldfa2c1OVpSNVg0OW12bmo1T285ZEpNVjJ5WGpZcjQzRl83bzVVRnpz?oc=5",
+      "summary": "Zhipu Unveils GLM-5.1, Its Most Advanced Open-Source Model with 8-Hour Autonomous Task Capability &nbsp;&nbsp; Pandaily",
+      "published_at": "Wed, 08 Apr 2026 08:19:10 GMT"
+    },
+    {
+      "source": "google_news_rss",
+      "title": "Zhipu Hikes Prices Again as China AI Monetization Wave Quickens - Bloomberg.com",
+      "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxPOHBKUGlHcnNfTS02QTh5ekViOUYyRS1nZzNXRFEzbU83TkpfbnU5QWwyemtEQUxOLVUzMmhNa0h3dnFKUk5vQ0hrbnBvTnJIRDBFU0ctZTNtT0VnV19vc0R2N2MtNGlfQ3BSRTc2cmZvX2JET0xsYnFySkw1YUp6M1kyNEhHZjdkTW44bXNCTEtkQldHMXVtZWFqYlkzV2kxTE9aQm12azlrN0FTQnRmSHR2VzU?oc=5",
+      "summary": "Zhipu Hikes Prices Again as China AI Monetization Wave Quickens &nbsp;&nbsp; Bloomberg.com",
+      "published_at": "Tue, 07 Apr 2026 07:00:00 GMT"
+    },
+    {
+      "source": "google_news_rss",
+      "title": "KNOWLEDGE ATLAS Open-Sources New-Gen Model GLM-5.1US Stocks - Global News Content - AASTOCKS.com",
+      "url": "https://news.google.com/rss/articles/CBMiigFBVV95cUxOY1pLRXRRLURNLTVnbnUxOUZDUkwzQUMtSFYyY0FIejJxV1pER2xWNGhkNEl2SS1EdXhtTkJ0LWRwSjlpZGt3NlJvMkFRVDctVDF3enlXQUt4cjI0bkpfcDcwMndmTXlySmFWSTJPTjQxb2FIOGxQX1ZKb1RHM0swN1U5Y1RucTlCYUE?oc=5",
+      "summary": "KNOWLEDGE ATLAS Open-Sources New-Gen Model GLM-5.1US Stocks - Global News Content &nbsp;&nbsp; AASTOCKS.com",
+      "published_at": "Wed, 08 Apr 2026 02:58:00 GMT"
+    },
+    {
+      "source": "google_news_rss",
+      "title": "Z.AI Introduces GLM-5.1: An Open-Weight 754B Agentic Model That Achieves SOTA on SWE-Bench Pro and Sustains 8-Hour Autonomous Execution - MarkTechPost",
+      "url": "https://news.google.com/rss/articles/CBMihgJBVV95cUxQWG1iSWoySDIwUGdFMV9hMGFHcEx4aTRfOFJBcXFCTURlOHNqd3VUMnJSWDhiS0ptSWVPaTRHakJmXzhFdGxPN3l1X0ZZXzZlVmF0NVRxRmlrc1R6c2Y2eEZXbGg3OXJQVGZWcjdZSGc3dUFueTM4Z1p4R2hsWDQ4M1FLV3lZS05nMWI2TUVwN1JuQ3FwYXUwSXhndmxJcHIzT2wzQ1JOMjFIM3d2NlFvc0NTdjc5VVhZTEJ6bEU1ZU9hTlhIVzZtbkdJRzA5WlVIa3hvaTZDU0hkcmpVa29CQXRQNDRaS3NBZFNkMlR4LWw5b3BFcHhzblREZUl1TURINmtCZVlR0gGLAkFVX3lxTE9ORDE4cXVfQnhqVGpXMW9EQlhjUFZOeF9OUkp0TXNKSEwxakZxSnlBS0dTRml1LU1hQVM4bW1ZVEsxanpIRHpYdTg4V1RnNDlXZTAza2c2X1lCbFUyUEtzYVpTUjRnUVJ3dVhya1ZBQzZpR1Y3NmtRak9jd1p1Q2hPaURnZ1JJSHFsSlNUWHJtZTFid2ZRZkRFckNROTZjVG1FdlV5TGcwYmpqaVFRbjc0ZnNIOFp6ZWVlbFNfQmJuSFBGQWhMcVNEdndULUtHaEljLVdlWXRyNm1zZEEwdDVqb2VBZ0MxcVBPTl8zZDNGQ0lRZDZtWnlrYVpobHR0THVTcWU5dllBanBSWQ?oc=5",
+      "summary": "Z.AI Introduces GLM-5.1: An Open-Weight 754B Agentic Model That Achieves SOTA on SWE-Bench Pro and Sustains 8-Hour Autonomous Execution &nbsp;&nbsp; MarkTechPost",
+      "published_at": "Wed, 08 Apr 2026 08:19:10 GMT"
+    },
+    {
+      "source": "google_news_rss",
+      "title": "GMI Cloud Highlights Early Support and Promotion for GLM-5.1 AI Model - TipRanks",
+      "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxPSmpna2ZPU0NFTFdsM1BOb0ZSWVJpaWpSdzkwNl9fQ0VHcVcyV0RDOUVHZGtxUDJtR1p6NE5GRjZLakpFck92WUFyNFZEM0ZQTDdoTkltTTlZSDJDX19DcFJEUHdoZFZjWVBxTUdfdEhUd19lMU1rY3Jqb3hLQ2hiWmxHWi05OVNFSTBsZFdTTXdReUo2N0hTZG5fMTc3Q3o1RXBheG1adGs0RmxjVG05emdEbERzWmhz?oc=5",
+      "summary": "GMI Cloud Highlights Early Support and Promotion for GLM-5.1 AI Model &nbsp;&nbsp; TipRanks",
+      "published_at": "Tue, 07 Apr 2026 18:24:51 GMT"
+    },
+    {
+      "source": "google_news_rss",
+      "title": "Z.ai Releases GLM-5.1: 754B Model Tops SWE-Bench Pro - WinBuzzer",
+      "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxNdF9lMEhiNHdKbTNlVFlEZk1RajU4TXhmTTBTS0Yya3R3RGlGRGg3aEs3VHNhY2M2a3pLclk5RlNRcUZ0cUU1NUp2Y2t5Z1ZXS1hReWNKUlpwdUtORzhWLVg3N0FNV1dUWlZQaVFpcXV4Q2ZkN3BPcHl5VGtRWXFDbDdlMk44ZnZMendqcm1GdlY1bXhLdXFJ?oc=5",
+      "summary": "Z.ai Releases GLM-5.1: 754B Model Tops SWE-Bench Pro &nbsp;&nbsp; WinBuzzer",
+      "published_at": "Thu, 09 Apr 2026 15:27:07 GMT"
+    },
+    {
+      "source": "google_news_rss",
+      "title": "Claude Mythos 5: Most Powerful Model Ever! AGI, GLM 5.1, Claude Code Update & Codex Plugins! AI NEWS [a5cbbe] - Fathom Journal",
+      "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE9YQ2FwYkd2YkJBZG1zNDlycGlCcDRiV196T1BmalpzR05Rc1NpakxzSDNkcW5WTzlLa3hRU3JsREkzYXpQcTN2bURMNGdUOUNoeTlDVHBodk1adFd5dm9Zdl9KOElYbjkwUDlaeHNWcHI?oc=5",
+      "summary": "Claude Mythos 5: Most Powerful Model Ever! AGI, GLM 5.1, Claude Code Update & Codex Plugins! AI NEWS [a5cbbe] &nbsp;&nbsp; Fathom Journal",
+      "published_at": "Wed, 15 Apr 2026 03:05:31 GMT"
+    },
+    {
+      "source": "google_news_rss",
+      "title": "AI Week in Review 26.04.04 - Substack",
+      "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE9pbDE3ZExPM3FjRXBLSXVXVWhYMTlCZ2psY2ZwbWxOT0FJSEd4LThNb3p1OW9SYlZhd2FRTU5ldGJOV2JEVlVzdlZPWDZ0SXdZT0dHYmNObGptWUVRUXVHS3Ywc1Y0WjZNOXZHaFVR?oc=5",
+      "summary": "AI Week in Review 26.04.04 &nbsp;&nbsp; Substack",
+      "published_at": "Sat, 04 Apr 2026 07:00:00 GMT"
+    },
+    {
+      "source": "google_news_rss",
+      "title": "Z.ai Raises Prices for GLM-5.1 Model - Let's Data Science",
+      "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxQdThtaFprS3BVRkROb3NGTlRSQjM4cjVMcXlvQXdwRDg0RGx1LVFMS2MyZGhfeFFlY19LTG44dWIyUWd4UUlZQXdiTEQ1THJGUE11RDc2Q2MzQWpLanpHOEROTkNJcEVKMDVzNWd2elNCWjJWMWxHTlpPcWRBS0Y3SmNR?oc=5",
+      "summary": "Z.ai Raises Prices for GLM-5.1 Model &nbsp;&nbsp; Let's Data Science",
+      "published_at": "Wed, 08 Apr 2026 06:15:01 GMT"
+    },
+    {
+      "source": "google_news_rss",
+      "title": "Together AI Highlights GLM-5.1 Upgrade and Enterprise-Grade AI Infrastructure - TipRanks",
+      "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxQdHpvM1F5emd1R0ZaUGFIUm9tVVZDYl9yNXR0ZW5ZYTZXWm9SSjR2VzdsYkFaN0RlcFVXTHh5czFXOGJYcnVCYjdtZmN0RzJPSUtUSTMtV0pBQl9qR1p3dmNpRXZMck9laEM4cEtydTVWZnJfNzd3cWY2T0ZmanVFNTRVUFJvbVo3YkgtTm9SQXZFRXJ0Mm0xV295ZlRzaFU3RWlIc0diZFlLT3V2QW5nN1F3OTZtLV9Qa3FDSVhyLU83Z0k?oc=5",
+      "summary": "Together AI Highlights GLM-5.1 Upgrade and Enterprise-Grade AI Infrastructure &nbsp;&nbsp; TipRanks",
+      "published_at": "Wed, 08 Apr 2026 07:00:00 GMT"
+    },
+    {
+      "source": "google_news_rss",
+      "title": "Robot Waifus, RIP Sora, GLM-5.1, AI Brain Scans, Google Realtime Voice: AI NEWS [38c364] - Fathom Journal",
+      "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE9ETl9MSHNkQk5uODdqWlk1VDlSUjdoNTd2VjBRSGJDOHljU0t5Mm5JZTY0aFJyNzhaTHFMeFJZUk9JQlFDeEJFRFR2NUdaV2pXN0VBa3RWYUhNVHB5T0ZRM3h3VDU3MXFaeGFCVFM4N2I?oc=5",
+      "summary": "Robot Waifus, RIP Sora, GLM-5.1, AI Brain Scans, Google Realtime Voice: AI NEWS [38c364] &nbsp;&nbsp; Fathom Journal",
+      "published_at": "Mon, 06 Apr 2026 22:19:41 GMT"
+    },
+    {
+      "source": "bing_news_rss",
+      "title": "Z.ai unveils GLM-5.1, enabling AI coding agents to run autonomously for hours",
+      "url": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=69e09004a6b04a7baf8233e646dae2f0&url=https%3A%2F%2Fwww.computerworld.com%2Farticle%2F4155606%2Fz-ai-unveils-glm-5-1-enabling-ai-coding-agents-to-run-autonomously-for-hours.html&c=11684469168832963194&mkt=en-us",
+      "summary": "The Chinese company said its new open-source model can continue to improve over hundreds of iterations, as AI vendors race to build tools that can handle longer software tasks.",
+      "published_at": "Wed, 08 Apr 2026 03:27:00 GMT"
+    },
+    {
+      "source": "bing_news_rss",
+      "title": "China’s Z.AI Releases GLM-5.1, Beats All US Models On SWE-Bench Pro",
+      "url": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=69e09004a6b04a7baf8233e646dae2f0&url=https%3A%2F%2Fofficechai.com%2Fai%2Fz-ai-glm-5-1-benchmarks-swe-bench-pro%2F&c=12687819603628083099&mkt=en-us",
+      "summary": "A Chinese model is now best in the world at a crucial coding benchmark. Z.AI, the Beijing-based lab formerly known as Zhipu ...",
+      "published_at": "Tue, 07 Apr 2026 10:17:00 GMT"
+    },
+    {
+      "source": "bing_news_rss",
+      "title": "GLM-5.1, long horizon AI coding",
+      "url": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=69e09004a6b04a7baf8233e646dae2f0&url=https%3A%2F%2Fwww.i-scoop.eu%2Fglm-5-1-long-horizon-ai-coding%2F&c=11514412236243776144&mkt=en-us",
+      "summary": "GLM-5.1 is a new open weights reasoning model focused on coding, agentic engineering and long horizon execution. This deep dive examines its benchmarks, strengths, limits, pricing and practical ...",
+      "published_at": "Thu, 09 Apr 2026 09:06:00 GMT"
+    },
+    {
+      "source": "bing_news_rss",
+      "title": "Zhipu AI Raises Prices For Its Most Advanced AI Models",
+      "url": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=69e09004a6b04a7baf8233e646dae2f0&url=https%3A%2F%2Fwww.marketwatch.com%2Fstory%2Fzhipu-ai-raises-prices-for-its-most-advanced-ai-models-356d13a6&c=13397066260395507108&mkt=en-us",
+      "summary": "Chinese artificial intelligence start-up Zhipu AI has raised prices of its most advanced AI model by about 10%, the latest tech company to announce price hikes for artificial-intelligence offerings.",
+      "published_at": "Wed, 08 Apr 2026 00:19:00 GMT"
+    },
+    {
+      "source": "bing_news_rss",
+      "title": "China’s Zhipu AI open-sources flagship model, raises prices to narrow gap with US rivals",
+      "url": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=69e09004a6b04a7baf8233e646dae2f0&url=https%3A%2F%2Fwww.msn.com%2Fen-xl%2Fmoney%2Ftechnology%2Fchina-s-zhipu-ai-open-sources-flagship-model-raises-prices-to-narrow-gap-with-us-rivals%2Far-AA20qoh3&c=15555833043637401126&mkt=en-us",
+      "summary": "The company's second price increase this year signals a push to monetise advanced AI models while keeping costs below US peers Chinese artificial intelligence company Zhipu AI open-sourced its latest ...",
+      "published_at": "Wed, 08 Apr 2026 06:00:27 GMT"
+    },
+    {
+      "source": "bing_news_rss",
+      "title": "KNOWLEDGE ATLAS Open-Sources New-Gen Model GLM-5.1",
+      "url": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=69e09004a6b04a7baf8233e646dae2f0&url=http%3A%2F%2Fwww.aastocks.com%2Fen%2Fstocks%2Fnews%2Faafn-news%2FNOW.1516194%2F&c=13722445978157786489&mkt=en-us",
+      "summary": "KNOWLEDGE ATLAS (02513.HK) released its new-generation open-source model GLM-5.1. According to data from OpenRouter, the company raised the price of its GLM model by a further 10%.... KNOWLEDGE ATLAS ...",
+      "published_at": "Tue, 07 Apr 2026 22:23:00 GMT"
+    },
+    {
+      "source": "bing_news_rss",
+      "title": "Zhipu shares jump on second AI price hike this year",
+      "url": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=69e09004a6b04a7baf8233e646dae2f0&url=https%3A%2F%2Fwww.investing.com%2Fnews%2Fstock-market-news%2Fzhipu-shares-jump-on-second-ai-price-hike-this-year-4601940&c=8254182200052383025&mkt=en-us",
+      "summary": "The hike marks the second time Zhipu has raised prices since listing on Hong Kong markets at the beginning of the year. Zhipu shares surged to a series of record highs over the past week after the ...",
+      "published_at": "Tue, 07 Apr 2026 23:22:00 GMT"
+    },
+    {
+      "source": "hackernews_algolia",
+      "title": "GLM-5.1: Towards Long-Horizon Tasks",
+      "url": "https://z.ai/blog/glm-5.1",
+      "summary": "",
+      "published_at": "2026-04-07T16:32:15Z"
+    },
+    {
+      "source": "hackernews_algolia",
+      "title": "GLM-5.1 Is Available",
+      "url": "https://twitter.com/Zai_org/status/2037490078126084514",
+      "summary": "GLM-5.1 is available to ALL GLM Coding Plan users!",
+      "published_at": "2026-03-27T11:39:31Z"
+    },
+    {
+      "source": "hackernews_algolia",
+      "title": "GLM-5.1 matches Opus 4.6 in agentic performance, at ~1/3 actual cost",
+      "url": "https://app.uniclaw.ai/arena/visualize?via=hn",
+      "summary": "",
+      "published_at": "2026-04-07T22:53:56Z"
+    },
+    {
+      "source": "hackernews_algolia",
+      "title": "GLM-5.1 Released",
+      "url": "https://twitter.com/i/status/2037490078126084514",
+      "summary": "",
+      "published_at": "2026-03-27T11:46:03Z"
+    },
+    {
+      "source": "hackernews_algolia",
+      "title": "GLM 5.1",
+      "url": "https://docs.z.ai/devpack/using5.1",
+      "summary": "",
+      "published_at": "2026-03-27T14:46:22Z"
+    },
+    {
+      "source": "hackernews_algolia",
+      "title": "GLM 5.1: Pelican Test",
+      "url": "https://simonwillison.net/2026/Apr/7/glm-51/",
+      "summary": "",
+      "published_at": "2026-04-08T07:38:19Z"
+    },
+    {
+      "source": "hackernews_algolia",
+      "title": "GLM-5.1",
+      "url": "https://twitter.com/Zai_org/status/2041550153354519022",
+      "summary": "",
+      "published_at": "2026-04-07T17:11:56Z"
+    },
+    {
+      "source": "hackernews_algolia",
+      "title": "GLM-5.1 tops Vector DB Benchmark",
+      "url": "https://vector-db-bench.kcores.com/en/",
+      "summary": "",
+      "published_at": "2026-04-01T16:19:44Z"
+    },
+    {
+      "source": "hackernews_algolia",
+      "title": "GLM 5.1 Is Out",
+      "url": "https://old.reddit.com/r/LocalLLaMA/comments/1s51id3/glm_51_is_out/",
+      "summary": "",
+      "published_at": "2026-03-27T17:59:54Z"
+    },
+    {
+      "source": "hackernews_algolia",
+      "title": "N-Day-Bench – Can LLMs find real vulnerabilities in real codebases?",
+      "url": "https://ndaybench.winfunc.com",
+      "summary": "N-Day-Bench tests whether frontier LLMs can find known security vulnerabilities in real repository code. Each month it pulls fresh cases from GitHub security advisories, checks out the repo at the last commit before the patch, and gives models a sandboxed bash shell to explore th",
+      "published_at": "2026-04-13T21:54:03Z"
+    },
+    {
+      "source": "duckduckgo_html",
+      "title": "GLM-5.1 - Overview - Z.AI DEVELOPER DOCUMENT",
+      "url": "https://docs.z.ai/guides/llm/glm-5.1",
+      "summary": "",
+      "published_at": null
+    },
+    {
+      "source": "duckduckgo_html",
+      "title": "GLM-5.1 - a zai-org Collection - Hugging Face",
+      "url": "https://huggingface.co/collections/zai-org/glm-51",
+      "summary": "",
+      "published_at": null
+    },
+    {
+      "source": "duckduckgo_html",
+      "title": "GitHub - GLM-5-1/GLM-5.1: Download the GLM-5.1 Lightweight Installer ...",
+      "url": "https://github.com/GLM-5-1/GLM-5.1",
+      "summary": "",
+      "published_at": null
+    }
+  ]
+}

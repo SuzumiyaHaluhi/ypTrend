@@ -1,0 +1,11 @@
+{
+  "query": "GLM 5.1",
+  "collected_at": "2026-04-16T07:30:53.340742+00:00",
+  "source_status": {
+    "zhihu_hot": "error: HTTP Error 401: Authorization Required",
+    "bilibili_popular": "ok",
+    "weibo_hot_search": "error: HTTP Error 403: Forbidden"
+  },
+  "item_count": 0,
+  "items": []
+}
