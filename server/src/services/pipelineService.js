@@ -140,6 +140,67 @@ function hasNotified(hotItemId, monitorId) {
   return Boolean(row);
 }
 
+function buildPipelineAlert({ source, monitor, code, severity = "warning", message, detail, stage = "collect" }) {
+  const normalizedSource = source || "unknown";
+  const monitorQuery = monitor || "unknown";
+  const alertMessage = message || `${normalizedSource} ${stage} failed`;
+  return {
+    key: `${stage}:${normalizedSource}:${code || alertMessage}`,
+    code: code || "PIPELINE_ALERT",
+    severity,
+    source: normalizedSource,
+    stage,
+    monitor: monitorQuery,
+    message: alertMessage,
+    detail: detail || "",
+    displayMessage:
+      code === "TWITTER_CREDITS_EXHAUSTED"
+        ? "Twitter credits exhausted: twitterapi.io credits not enough. Please recharge."
+        : `[${normalizedSource}] ${alertMessage}${detail ? ` - ${detail}` : ""}`,
+    ts: nowIso()
+  };
+}
+
+function logPipelineAlert(alert) {
+  const level = alert.severity === "error" ? "error" : "warn";
+  console[level](
+    `[ypTrend][ALERT][${alert.source}:${alert.stage}] ${alert.message}` +
+      `${alert.monitor ? ` | monitor=${alert.monitor}` : ""}` +
+      `${alert.code ? ` | code=${alert.code}` : ""}` +
+      `${alert.detail ? ` | detail=${alert.detail}` : ""}`
+  );
+}
+
+function emitPipelineAlert(alert, emittedAlerts, alerts) {
+  if (!alert || emittedAlerts.has(alert.key)) return;
+  emittedAlerts.add(alert.key);
+  alerts.push(alert);
+  logPipelineAlert(alert);
+  eventBus.emit("realtime-event", {
+    type: "system_alert",
+    data: alert
+  });
+}
+
+function emitCollectedSourceAlerts({ source, monitor, collected, emittedAlerts, alerts }) {
+  if (!Array.isArray(collected) || !Array.isArray(collected.ypTrendAlerts)) return;
+  for (const alert of collected.ypTrendAlerts) {
+    emitPipelineAlert(
+      buildPipelineAlert({
+        source,
+        monitor,
+        stage: "collect",
+        code: alert.code,
+        severity: alert.severity || "warning",
+        message: alert.userMessage || `${source} collect degraded`,
+        detail: alert.detail
+      }),
+      emittedAlerts,
+      alerts
+    );
+  }
+}
+
 async function collectBySource(source, query, limit, settings) {
   if (source === "twitter") return fetchFromTwitter(query, limit, settings.twitterQuality || {});
   if (source === "web") return fetchFromWebSearch(query, limit);
@@ -287,6 +348,7 @@ async function runPipeline({ source } = {}) {
         processed: 0,
         notified: 0,
         errors: [],
+        alerts: [],
         freshnessWindowDays: FRESHNESS_WINDOW_DAYS,
         staleCleanup: freshnessPruneResult
       };
@@ -296,6 +358,8 @@ async function runPipeline({ source } = {}) {
     let processed = 0;
     let notified = 0;
     const errors = [];
+    const alerts = [];
+    const emittedAlerts = new Set();
     const sourceStats = {
       twitter: { collected: 0, processed: 0, notified: 0, skippedLowTrustNoCorroboration: 0, skippedStaleWindow: 0, skippedNotHighTier: 0 },
       web: { collected: 0, processed: 0, notified: 0, skippedLowTrustNoCorroboration: 0, skippedStaleWindow: 0, skippedNotHighTier: 0 },
@@ -310,8 +374,37 @@ async function runPipeline({ source } = {}) {
           const collected = await collectBySource(src, monitor.query, settings.limits.perSource, settings);
           collectedBySource[src] = collected;
           sourceStats[src].collected += collected.length;
+          emitCollectedSourceAlerts({
+            source: src,
+            monitor: monitor.query,
+            collected,
+            emittedAlerts,
+            alerts
+          });
         } catch (error) {
-          errors.push({ source: src, monitor: monitor.query, stage: "collect", message: error.message });
+          const classification = error?.ypTrend;
+          errors.push({
+            source: src,
+            monitor: monitor.query,
+            stage: "collect",
+            message: error.message,
+            code: classification?.code,
+            severity: classification?.severity,
+            detail: classification?.detail
+          });
+          emitPipelineAlert(
+            buildPipelineAlert({
+              source: src,
+              monitor: monitor.query,
+              stage: "collect",
+              code: classification?.code,
+              severity: classification?.severity || "warning",
+              message: classification?.userMessage || `${src} collect failed`,
+              detail: classification?.detail || error.message
+            }),
+            emittedAlerts,
+            alerts
+          );
           collectedBySource[src] = [];
         }
       }
@@ -440,6 +533,7 @@ async function runPipeline({ source } = {}) {
       processed,
       notified,
       errors,
+      alerts,
       sourceStats,
       freshnessWindowDays: FRESHNESS_WINDOW_DAYS,
       staleCleanup: freshnessPruneResult

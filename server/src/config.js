@@ -41,7 +41,7 @@ const defaultDbFallback = (process.env.NODE_ENV || "development") !== "productio
 const config = {
   port: toNumber(process.env.PORT, 8787),
   env: process.env.NODE_ENV || "development",
-  dbFile: process.env.DB_FILE || ":memory:",
+  dbFile: process.env.DB_FILE || path.join(dataDir, "yptrend.db"),
   dbAllowMemoryFallback: toBoolean(process.env.DB_ALLOW_MEMORY_FALLBACK, defaultDbFallback),
   sqliteJournalMode: toJournalMode(process.env.SQLITE_JOURNAL_MODE, "MEMORY"),
   openRouterApiKey: process.env.OPENROUTER_API_KEY || "",

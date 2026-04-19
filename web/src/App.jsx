@@ -24,6 +24,18 @@ const SOURCE_META = {
   rss: { label: "RSS", icon: Rss, tone: "rss" }
 };
 
+function extractApiErrorMessage(payload) {
+  if (!payload) return "";
+  if (typeof payload === "string") return payload;
+  if (typeof payload.error === "string") return payload.error;
+  const fieldErrors = payload.error?.fieldErrors;
+  if (fieldErrors && typeof fieldErrors === "object") {
+    const firstMessage = Object.values(fieldErrors).flat().find(Boolean);
+    if (firstMessage) return String(firstMessage);
+  }
+  return "";
+}
+
 async function api(path, options) {
   const response = await fetch(`${API_BASE}${path}`, {
     headers: { "Content-Type": "application/json" },
@@ -32,7 +44,13 @@ async function api(path, options) {
 
   if (!response.ok) {
     const text = await response.text();
-    throw new Error(text || `HTTP ${response.status}`);
+    let parsed = null;
+    try {
+      parsed = text ? JSON.parse(text) : null;
+    } catch {
+      parsed = null;
+    }
+    throw new Error(extractApiErrorMessage(parsed) || text || `HTTP ${response.status}`);
   }
 
   if (response.status === 204) return null;
@@ -79,6 +97,19 @@ function formatConfidence(value) {
   const num = Number(value);
   if (!Number.isFinite(num)) return "--";
   return num.toFixed(2);
+}
+
+function formatSystemAlertStatus(alert) {
+  if (!alert) return "";
+  if (alert.code === "TWITTER_CREDITS_EXHAUSTED") {
+    return "Twitter credits exhausted: twitterapi.io 额度不足，请充值后再试";
+  }
+  return alert.displayMessage || alert.message || "";
+}
+
+function pickPriorityAlert(alerts) {
+  if (!Array.isArray(alerts) || alerts.length === 0) return null;
+  return alerts.find((alert) => alert?.code === "TWITTER_CREDITS_EXHAUSTED") || alerts[0];
 }
 
 function isTrueLike(value) {
@@ -182,6 +213,12 @@ function App() {
           setNotifications((prev) => dedupeById([msg.data, ...prev]).slice(0, 120));
           setStatus("命中可推送内容，通知流已实时更新");
         }
+        if (msg.type === "system_alert") {
+          const nextStatus = formatSystemAlertStatus(msg.data);
+          if (nextStatus) {
+            setStatus(nextStatus);
+          }
+        }
       } catch {
         // ignore malformed event payload
       }
@@ -246,7 +283,14 @@ function App() {
         method: "POST",
         body: JSON.stringify(source ? { source } : {})
       });
-      setStatus(`扫描完成：处理 ${result.processed || 0} 条，命中通知 ${result.notified || 0} 条`);
+      const priorityAlert = pickPriorityAlert(result.alerts);
+      if (priorityAlert) {
+        setStatus(formatSystemAlertStatus(priorityAlert));
+      } else if (Array.isArray(result.errors) && result.errors.length > 0) {
+        setStatus(`扫描完成，但有 ${result.errors.length} 个采集错误`);
+      } else {
+        setStatus(`扫描完成：处理 ${result.processed || 0} 条，命中通知 ${result.notified || 0} 条`);
+      }
       await loadAll();
     } catch (error) {
       setStatus(error.message);
@@ -271,7 +315,7 @@ function App() {
           notifyMinEngagementScore: Number(settings.twitterQuality?.notifyMinEngagementScore ?? 2000)
         },
         notification: {
-          feishuWebhook: settings.notification.feishuWebhook,
+          feishuWebhook: settings.notification.feishuWebhook.trim(),
           feishuKeyword: settings.notification.feishuKeyword
         },
         limits: {

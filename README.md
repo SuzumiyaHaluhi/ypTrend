@@ -76,6 +76,12 @@ python -B skills/hot-monitor/scripts/generate_report.py --query "AI coding" --in
 - `search_twitter.py` 需要可选环境变量 `TWITTERAPI_IO_KEY`。
 - 未配置 Key 时会自动跳过 Twitter 源，不会中断整体流程。
 
+### 4) Web 平台默认存储
+
+- 后端默认使用落盘 SQLite：`data/yptrend.db`
+- 如需切换数据库文件，可通过环境变量 `DB_FILE` 覆盖
+- 如需临时无状态运行，可显式设置 `DB_FILE=:memory:`
+
 ## 测试与验收
 
 ### Web 平台

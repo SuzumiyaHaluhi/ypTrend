@@ -15,6 +15,38 @@ function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
+function getTwitterApiErrorText(error) {
+  const payload = error?.response?.data;
+  if (typeof payload === "string") return payload;
+  if (!payload || typeof payload !== "object") return String(error?.message || "");
+  return [payload.error, payload.message].filter(Boolean).join(" - ");
+}
+
+function classifyTwitterApiError(error) {
+  const status = Number(error?.response?.status);
+  const detail = getTwitterApiErrorText(error);
+
+  if (status === 402 && /credits?\s+is\s+not\s+enough|recharge/i.test(detail)) {
+    return {
+      code: "TWITTER_CREDITS_EXHAUSTED",
+      severity: "error",
+      userMessage: "Twitter credits exhausted",
+      detail
+    };
+  }
+
+  if (status === 429 || /Too Many Requests|QPS limit/i.test(detail)) {
+    return {
+      code: "TWITTER_RATE_LIMITED",
+      severity: "warning",
+      userMessage: "Twitter API rate limited",
+      detail
+    };
+  }
+
+  return null;
+}
+
 async function fetchFromTwitter(query, limit = 8, qualityOverrides = {}) {
   if (!config.twitterApiKey) {
     return [];
@@ -83,11 +115,16 @@ async function fetchFromTwitter(query, limit = 8, qualityOverrides = {}) {
 
       return filtered;
     } catch (error) {
-      const status = error.response?.status;
-      const rawText = typeof error.response?.data === "string" ? error.response.data : JSON.stringify(error.response?.data || {});
-      const qpsLimited = status === 429 || /Too Many Requests|QPS limit/i.test(rawText);
+      const classification = classifyTwitterApiError(error);
+      if (classification) {
+        error.ypTrend = classification;
+      }
+
+      const qpsLimited = classification?.code === "TWITTER_RATE_LIMITED";
       if (qpsLimited) {
         await sleep(5200);
+      } else if (classification?.code === "TWITTER_CREDITS_EXHAUSTED") {
+        throw error;
       }
       lastError = error;
     }
@@ -183,8 +220,10 @@ function evaluateTweetQuality(tweet, options) {
   const isReply = isReplyTweet(tweet);
   const isRetweet = isRetweetTweet(tweet);
   const isQuote = isQuoteTweet(tweet);
+  const isOriginal = !isReply && !isQuote && !isRetweet;
+  const shouldExcludeRetweet = Boolean(options.excludeRetweets) && isRetweet;
 
-  if (isReply || isQuote || isRetweet) {
+  if (isReply || isQuote || shouldExcludeRetweet) {
     const reason = isReply ? "reply_not_original" : isQuote ? "quote_not_original" : "retweet_not_original";
     return {
       keep: false,
@@ -192,7 +231,7 @@ function evaluateTweetQuality(tweet, options) {
       trustLevel: "low",
       engagementScore,
       engagementTier,
-      isOriginal: false,
+      isOriginal,
       isReply,
       isQuote,
       isRetweet,
@@ -208,7 +247,7 @@ function evaluateTweetQuality(tweet, options) {
       trustLevel: "low",
       engagementScore,
       engagementTier,
-      isOriginal: true,
+      isOriginal,
       isReply,
       isQuote,
       isRetweet,
@@ -228,7 +267,7 @@ function evaluateTweetQuality(tweet, options) {
       trustLevel: "low",
       engagementScore,
       engagementTier,
-      isOriginal: true,
+      isOriginal,
       isReply,
       isQuote,
       isRetweet,
@@ -254,7 +293,7 @@ function evaluateTweetQuality(tweet, options) {
     trustLevel,
     engagementScore,
     engagementTier,
-    isOriginal: true,
+    isOriginal,
     isReply,
     isQuote,
     isRetweet,
@@ -266,6 +305,7 @@ function evaluateTweetQuality(tweet, options) {
 module.exports = {
   fetchFromTwitter,
   __test: {
+    classifyTwitterApiError,
     isReplyTweet,
     isQuoteTweet,
     isRetweetTweet,

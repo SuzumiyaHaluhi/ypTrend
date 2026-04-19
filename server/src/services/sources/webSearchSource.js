@@ -6,6 +6,33 @@ const { normalizeUrl } = require("../../utils/common");
 
 const parser = new Parser();
 
+function formatProviderError(error) {
+  const status = error?.response?.status;
+  const baseMessage =
+    error?.response?.data?.message ||
+    error?.response?.data?.error ||
+    error?.message ||
+    "Unknown error";
+  return status ? `${baseMessage} (status ${status})` : String(baseMessage);
+}
+
+function buildDegradedSourceAlert(code, userMessage, providerFailures) {
+  return {
+    code,
+    severity: "warning",
+    userMessage,
+    detail: providerFailures.map(({ provider, error }) => `${provider}: ${error}`).join("; ")
+  };
+}
+
+function attachSourceAlerts(items, alerts) {
+  if (!Array.isArray(items) || !Array.isArray(alerts) || !alerts.length) {
+    return items;
+  }
+  items.ypTrendAlerts = alerts;
+  return items;
+}
+
 function toLangTag(locale) {
   const value = String(locale || "").toLowerCase();
   if (value.startsWith("zh")) return "zh-Hans";
@@ -107,24 +134,50 @@ async function fetchFromWebSearch(query, limit = 8) {
     : ["zh-CN", "en-US"];
 
   const perEngine = Math.max(4, Math.ceil(limit / 2));
-  const tasks = [
-    () => fetchDuckDuckGo(query, perEngine)
-  ];
+  const tasks = [{ provider: "duckduckgo_html", run: () => fetchDuckDuckGo(query, perEngine) }];
 
   for (const locale of locales) {
-    tasks.push(() => fetchBingRss({ query, limit: perEngine, locale, type: "web" }));
-    tasks.push(() => fetchBingRss({ query, limit: perEngine, locale, type: "news" }));
+    tasks.push({
+      provider: `bing_web:${locale}`,
+      run: () => fetchBingRss({ query, limit: perEngine, locale, type: "web" })
+    });
+    tasks.push({
+      provider: `bing_news:${locale}`,
+      run: () => fetchBingRss({ query, limit: perEngine, locale, type: "news" })
+    });
   }
 
-  const settled = await Promise.allSettled(tasks.map((fn) => fn()));
+  const settled = await Promise.allSettled(tasks.map((task) => task.run()));
   const merged = [];
-  for (const result of settled) {
+  const providerFailures = [];
+  for (const [index, result] of settled.entries()) {
     if (result.status === "fulfilled" && Array.isArray(result.value)) {
       merged.push(...result.value);
+      continue;
     }
+    providerFailures.push({
+      provider: tasks[index].provider,
+      error: formatProviderError(result.reason)
+    });
   }
 
-  return dedupeResults(merged, limit);
+  if (!merged.length && providerFailures.length) {
+    const error = new Error("Web source collection failed");
+    error.ypTrend = buildDegradedSourceAlert("WEB_SOURCE_UNAVAILABLE", "Web source collection failed", providerFailures);
+    throw error;
+  }
+
+  const alerts = [];
+  if (providerFailures.length) {
+    alerts.push(buildDegradedSourceAlert("WEB_SOURCE_PARTIAL_FAILURE", "Web source partially degraded", providerFailures));
+  }
+
+  return attachSourceAlerts(dedupeResults(merged, limit), alerts);
 }
 
-module.exports = { fetchFromWebSearch };
+module.exports = {
+  fetchFromWebSearch,
+  __test: {
+    buildDegradedSourceAlert
+  }
+};

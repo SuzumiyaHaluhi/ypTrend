@@ -4,6 +4,29 @@ const { normalizeUrl } = require("../../utils/common");
 
 const parser = new Parser();
 
+function formatProviderError(error) {
+  const status = error?.response?.status;
+  const message = error?.message || "Unknown error";
+  return status ? `${message} (status ${status})` : String(message);
+}
+
+function buildDegradedSourceAlert(code, userMessage, providerFailures) {
+  return {
+    code,
+    severity: "warning",
+    userMessage,
+    detail: providerFailures.map(({ provider, error }) => `${provider}: ${error}`).join("; ")
+  };
+}
+
+function attachSourceAlerts(items, alerts) {
+  if (!Array.isArray(items) || !Array.isArray(alerts) || !alerts.length) {
+    return items;
+  }
+  items.ypTrendAlerts = alerts;
+  return items;
+}
+
 function buildGoogleNewsRssUrl(query, locale) {
   if (String(locale).toLowerCase().startsWith("zh")) {
     return `https://news.google.com/rss/search?q=${encodeURIComponent(query)}&hl=zh-CN&gl=CN&ceid=CN:zh-Hans`;
@@ -51,13 +74,35 @@ async function fetchFromRss(query, limit = 8) {
   const settled = await Promise.allSettled(locales.map((locale) => fetchLocaleFeed(query, locale, perLocale)));
 
   const merged = [];
-  for (const result of settled) {
+  const providerFailures = [];
+  for (const [index, result] of settled.entries()) {
     if (result.status === "fulfilled" && Array.isArray(result.value)) {
       merged.push(...result.value);
+      continue;
     }
+    providerFailures.push({
+      provider: `google_news_rss:${locales[index]}`,
+      error: formatProviderError(result.reason)
+    });
   }
 
-  return dedupeByUrl(merged, limit);
+  if (!merged.length && providerFailures.length) {
+    const error = new Error("RSS source collection failed");
+    error.ypTrend = buildDegradedSourceAlert("RSS_SOURCE_UNAVAILABLE", "RSS source collection failed", providerFailures);
+    throw error;
+  }
+
+  const alerts = [];
+  if (providerFailures.length) {
+    alerts.push(buildDegradedSourceAlert("RSS_SOURCE_PARTIAL_FAILURE", "RSS source partially degraded", providerFailures));
+  }
+
+  return attachSourceAlerts(dedupeByUrl(merged, limit), alerts);
 }
 
-module.exports = { fetchFromRss };
+module.exports = {
+  fetchFromRss,
+  __test: {
+    buildDegradedSourceAlert
+  }
+};

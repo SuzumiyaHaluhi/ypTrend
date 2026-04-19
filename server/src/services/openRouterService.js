@@ -99,18 +99,26 @@ function heuristicEvaluation({ monitor, item, model, reason }) {
   };
 }
 
+function buildMissingApiKeyEvaluation({ monitor, item, model }) {
+  const heuristic = heuristicEvaluation({
+    monitor,
+    item,
+    model,
+    reason: "OpenRouter API key missing"
+  });
+
+  return {
+    ...heuristic,
+    reason: "OpenRouter API key missing, heuristic fallback result. Notifications disabled.",
+    shouldNotify: false
+  };
+}
+
 async function evaluateItem({ monitor, item }) {
   const model = await selectModel();
 
   if (!config.openRouterApiKey) {
-    return {
-      model,
-      isRelevant: true,
-      isCredible: true,
-      confidence: 0.5,
-      reason: "OpenRouter API key missing, fallback heuristic result.",
-      shouldNotify: monitor.type === "keyword"
-    };
+    return buildMissingApiKeyEvaluation({ monitor, item, model });
   }
 
   const prompt = `You are a strict hot-topic verifier.\nReturn only JSON with keys: isRelevant,isCredible,confidence,reason,shouldNotify.\nMonitor type: ${monitor.type}\nMonitor query: ${monitor.query}\nCandidate title: ${item.title}\nCandidate summary: ${item.summary || ""}\nSource: ${item.source}\nURL: ${item.url}`;
@@ -184,5 +192,9 @@ async function evaluateItem({ monitor, item }) {
 
 module.exports = {
   evaluateItem,
-  selectModel
+  selectModel,
+  __test: {
+    heuristicEvaluation,
+    buildMissingApiKeyEvaluation
+  }
 };

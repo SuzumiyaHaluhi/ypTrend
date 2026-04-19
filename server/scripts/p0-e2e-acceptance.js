@@ -19,9 +19,9 @@ async function waitFor(fn, timeoutMs, intervalMs = 500) {
   throw lastError || new Error("Timeout");
 }
 
-function createSseCollector(streamUrl) {
+function createSseCollector(streamUrl, requiredTypes = ["hot_item"]) {
   const events = [];
-  const requiredTypes = new Set(["hot_item", "notification"]);
+  const requiredTypeSet = new Set(requiredTypes);
   const matchedTypes = new Set();
   let closed = false;
   let resolveReady;
@@ -64,7 +64,7 @@ function createSseCollector(streamUrl) {
         try {
           const payload = JSON.parse(payloadText);
           events.push(payload);
-          if (payload && payload.type && requiredTypes.has(payload.type)) {
+          if (payload && payload.type && requiredTypeSet.has(payload.type)) {
             matchedTypes.add(payload.type);
           }
         } catch {
@@ -99,10 +99,10 @@ function createSseCollector(streamUrl) {
     },
     async waitForRequiredTypes(timeoutMs = 60000) {
       await waitFor(() => {
-        if (requiredTypes.size === matchedTypes.size) {
+        if (requiredTypeSet.size === matchedTypes.size) {
           return true;
         }
-        throw new Error(`Waiting SSE events: ${Array.from(requiredTypes).filter((x) => !matchedTypes.has(x)).join(", ")}`);
+        throw new Error(`Waiting SSE events: ${Array.from(requiredTypeSet).filter((x) => !matchedTypes.has(x)).join(", ")}`);
       }, timeoutMs, 300);
     },
     close() {
@@ -157,7 +157,7 @@ async function main() {
       return resp.data;
     }, 30000, 500);
 
-    sse = createSseCollector(`${baseUrl}/api/stream`);
+    sse = createSseCollector(`${baseUrl}/api/stream`, ["hot_item"]);
     await sse.ready();
 
     const createResp = await axios.post(`${baseUrl}/api/keywords`, {
@@ -197,15 +197,12 @@ async function main() {
       return resp.data;
     }, 30000, 500);
 
-    const notifications = await waitFor(async () => {
-      const resp = await axios.get(`${baseUrl}/api/notifications?limit=120`, { timeout: 10000, proxy: false });
-      const rows = Array.isArray(resp.data) ? resp.data : [];
-      const matched = rows.filter((row) => row.monitor_query === monitorQuery);
-      if (!matched.length) {
-        throw new Error("No notification rows found for the created monitor yet");
-      }
-      return matched;
-    }, 30000, 500);
+    const notificationsResp = await axios.get(`${baseUrl}/api/notifications?limit=120`, { timeout: 10000, proxy: false });
+    const notifications = Array.isArray(notificationsResp.data) ? notificationsResp.data : [];
+    const matchedNotifications = notifications.filter((row) => row.monitor_query === monitorQuery);
+    if (matchedNotifications.length !== 0) {
+      throw new Error("Expected no notifications when OPENROUTER_API_KEY is missing");
+    }
 
     try {
       await sse.waitForRequiredTypes(30000);

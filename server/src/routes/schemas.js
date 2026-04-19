@@ -1,5 +1,10 @@
 ﻿const { z } = require("zod");
 
+const emptyOrUrlSchema = z.preprocess(
+  (value) => (typeof value === "string" ? value.trim() : value),
+  z.union([z.literal(""), z.string().url()])
+);
+
 const createMonitorSchema = z.object({
   type: z.enum(["keyword", "scope"]),
   query: z.string().min(1)
@@ -35,7 +40,7 @@ const updateSettingsSchema = z.object({
     highThreshold: z.number().int().min(50).max(100).optional()
   }).optional(),
   notification: z.object({
-    feishuWebhook: z.string().url().optional(),
+    feishuWebhook: emptyOrUrlSchema.optional(),
     feishuKeyword: z.string().min(1).optional()
   }).optional()
 });
